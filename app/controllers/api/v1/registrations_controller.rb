@@ -1,6 +1,10 @@
 module Api
   module V1
     class RegistrationsController < ApplicationController
+      rescue_from ActionController::ParameterMissing do |e|
+        render json: { error: e.message }, status: :bad_request
+      end
+
       def create
         result = UserRegistrationService.new(registration_params[:pseudo]).call
 
