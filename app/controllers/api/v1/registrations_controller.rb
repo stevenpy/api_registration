@@ -3,7 +3,7 @@ module Api
     class RegistrationsController < ApplicationController
       def create
         result = UserRegistrationService.new(registration_params[:pseudo]).call
-        
+
         if result[:success]
           render json: {
             pseudo: result[:pseudo],
