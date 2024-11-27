@@ -7,7 +7,7 @@ class UserRegistrationService
     pseudo = nil
 
     ActiveRecord::Base.transaction do
-      pseudo = AvailablePseudo.get_pseudo(@pseudo)
+      pseudo = AvailablePseudo.give_pseudo(@pseudo)
       User.create!(pseudo: pseudo)
     end
 

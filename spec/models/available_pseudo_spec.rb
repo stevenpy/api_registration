@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AvailablePseudo, type: :model do
-  describe '.get_pseudo' do
+  describe '.give_pseudo' do
     before(:each) do
       AvailablePseudo.delete_all
     end
@@ -11,7 +11,7 @@ RSpec.describe AvailablePseudo, type: :model do
         AvailablePseudo.create!(pseudo: 'ABC')
         AvailablePseudo.create!(pseudo: 'XYZ')
 
-        result = AvailablePseudo.get_pseudo('ABC')
+        result = AvailablePseudo.give_pseudo('ABC')
 
         expect(result).to eq('ABC')
         expect(AvailablePseudo.find_by(pseudo: 'ABC')).to be_nil
@@ -24,7 +24,7 @@ RSpec.describe AvailablePseudo, type: :model do
         AvailablePseudo.create!(pseudo: 'ABC')
         AvailablePseudo.create!(pseudo: 'XYZ')
 
-        result = AvailablePseudo.get_pseudo(nil)
+        result = AvailablePseudo.give_pseudo(nil)
 
         expect(result).to match(/^[A-Z]{3}$/)
         expect(AvailablePseudo.count).to eq(1)
@@ -34,7 +34,7 @@ RSpec.describe AvailablePseudo, type: :model do
     context 'when no pseudos are available' do
       it 'raises an error' do
         expect {
-          AvailablePseudo.get_pseudo('ABC')
+          AvailablePseudo.give_pseudo('ABC')
         }.to raise_error(StandardError, 'No more pseudos available')
       end
     end
@@ -43,7 +43,7 @@ RSpec.describe AvailablePseudo, type: :model do
       it 'returns the first available pseudo instead' do
         AvailablePseudo.create!(pseudo: 'XYZ')
 
-        result = AvailablePseudo.get_pseudo('ABC')
+        result = AvailablePseudo.give_pseudo('ABC')
 
         expect(result).to eq('XYZ')
         expect(AvailablePseudo.count).to eq(0)
