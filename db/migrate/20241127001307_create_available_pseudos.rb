@@ -1,7 +1,7 @@
 class CreateAvailablePseudos < ActiveRecord::Migration[7.1]
   def change
     create_table :available_pseudos do |t|
-      t.string :pseudo
+      t.string :pseudo, null: false
 
       t.timestamps
     end
