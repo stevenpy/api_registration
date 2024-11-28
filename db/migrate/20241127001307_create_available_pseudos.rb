@@ -5,6 +5,6 @@ class CreateAvailablePseudos < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
-    add_index :available_pseudos, :pseudo
+    add_index :available_pseudos, :pseudo, unique: true
   end
 end

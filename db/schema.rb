@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_27_001307) do
     t.string "pseudo", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["pseudo"], name: "index_available_pseudos_on_pseudo"
+    t.index ["pseudo"], name: "index_available_pseudos_on_pseudo", unique: true
   end
 
   create_table "users", force: :cascade do |t|
