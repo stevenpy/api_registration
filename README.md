@@ -12,7 +12,7 @@ This API endpoint provides a solution for registrating users with unique 3-lette
 
 We use a dedicated `available_pseudos` table that stores all possible 3-letter combinations (17,576 combinations from AAA to ZZZ). This approach offers:
 
-- Constant time O(1) pseudo allocation
+- Constant time O(log n) pseudo allocation
 - Predictable performance
 - Minimal database operations : 2 (SELECT + DELETE)
 
