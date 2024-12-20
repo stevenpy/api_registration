@@ -1,24 +1,63 @@
-# README
+# 📝 API user registration
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A REST API endpoint that manages user registration.
 
-Things you may want to cover:
+## 👨‍💻 Overview
 
-* Ruby version
+This API endpoint provides a solution for registrating users with unique 3-letter pseudos (AAA to ZZZ) using a pre-allocated table approach.
 
-* System dependencies
+## ⚙️ Technical Approach
 
-* Configuration
+### Pre-allocated Table Strategy
 
-* Database creation
+We use a dedicated `available_pseudos` table that stores all possible 3-letter combinations (17,576 combinations from AAA to ZZZ). This approach offers:
 
-* Database initialization
+- Constant time O(log n) pseudo allocation
+- Predictable performance
+- Minimal database operations : 2 (SELECT + DELETE)
 
-* How to run the test suite
+## 🕵️ Setup
 
-* Services (job queues, cache servers, search engines, etc.)
+### Requirements
+- Ruby 3.3
+- Rails 7.1.5
+- PostgreSQL
 
-* Deployment instructions
+### Installation
 
-* ...
+1. Clone the repository
+2. Install dependencies : `bundle install`
+3. Setup database : `rails db:create db:migrate`
+4. Seed `available_pseudos` table : `rake pseudo:generate`
+5. Run server : `rails server`
+
+## 📚 API Documentation
+
+### Create User
+
+```http
+POST /api/v1/signup
+```
+
+**Request Body:**
+```json
+{
+  "user": {
+    "pseudo": "XWC"
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "pseudo": "XWC",
+  "message": "User created successfully"
+}
+```
+## ✅ Tests
+To run the test suite using RSpec
+
+```sh
+bundle exec rspec
+```
